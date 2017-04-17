@@ -1,0 +1,21 @@
+INDEX VERSION 1.130+C:\Users\Михаил\workspace\BotTest\.metadata\.plugins\org.eclipse.jdt.core
+232386928.index
+2719345695.index
+292957837.index
+1383950003.index
+2329495254.index
+767804312.index
+51224623.index
+3922340713.index
+2649385763.index
+1429156015.index
+4256042831.index
+3268805141.index
+1848211610.index
+1001928704.index
+3864213669.index
+1982339551.index
+1316793150.index
+961000072.index
+2141443438.index
+3830617294.index
