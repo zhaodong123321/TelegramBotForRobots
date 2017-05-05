@@ -1,0 +1,86 @@
+import java.io.File;
+import java.util.Date;
+
+import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.TelegramBotsApi;
+import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.api.objects.Message;
+import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.exceptions.TelegramApiException;
+
+public class VimiBot extends TelegramLongPollingBot {
+
+    public static void main(String[] args) {
+        ApiContextInitializer.init();
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+        try {
+            telegramBotsApi.registerBot(new VimiBot());
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String getBotUsername() {
+        return "Bot_name";
+    }
+
+    @Override
+    public String getBotToken() {
+        return "Bot_Token";
+    }
+
+    @Override
+    public void onUpdateReceived(Update update) {
+        Message message = update.getMessage();
+        if (message != null && message.hasText()) {
+        	String sms = message.getText();
+            switch (sms){
+            	case "/start":
+            		sendMessage(message, "Lets go!");
+            		break;
+            	case "Command": 
+            		sendMessage(message, "Command, Hello, Bear, Date");
+            		break;
+            	case "Hello":
+            		sendMessage(message, "Hello my friend!");
+            		break;
+            	case "Bear":
+            		sendMessage(message, "Beaaaaar.....mmmm...");
+            		sendImage("C:\\Users\\Михаил\\Pictures\\ulvenwald_bear_by_jasonengle-d4ngn42.jpg" , message.getChatId().toString());
+            		break;
+            	case "Date":
+            		Date curTime = new Date();
+            		sendMessage(message, curTime.toString());
+            		break;
+            	default:
+            		sendMessage(message, "What?");           					
+            }
+        }
+    }
+
+    private void sendMessage(Message message, String text) {
+        SendMessage sendedMessage = new SendMessage();
+        sendedMessage.enableMarkdown(true);
+        sendedMessage.setChatId(message.getChatId().toString());
+        sendedMessage.setText(text);
+        try {
+            sendMessage(sendedMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void sendImage(String filePath, String chatId) {
+        SendPhoto sendPhotoRequest = new SendPhoto();
+        sendPhotoRequest.setChatId(chatId);
+        sendPhotoRequest.setNewPhoto(new File(filePath));
+        try {
+            sendPhoto(sendPhotoRequest);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="sendedMessage.setChatId(message.getChatId().toString());" key="selection"/>
+		<list key="findhistory">
+			<item value="sendedMessage.setChatId(message.getChatId().toString());"/>
+		</list>
+	</section>
+</section>
